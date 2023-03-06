@@ -1,7 +1,7 @@
 # Project 00 For NeXT CS
 ### Class Period:
-### Name0: YOUR NAME HERE
-### Name1: OTHER NAME HERE (delete this line if you are working solo)
+### Name0: Eric Tang
+### Name1: Kai Chandan
 ---
 
 
@@ -35,49 +35,57 @@ Type Racer specific requirements.
 
 ## Phase 0: Game Selection, Analysis & Plan
 
-#### Selected Game: YOUR GAME HERE
+#### Selected Game: WORDLE
 
 ### Rules
 What are the core rules of your game?
 
-YOUR ANSWER HERE
+Player guesses a 5-letter word form a word bank, and the letters of that word are sorted into gray, yellow and green which are respectively not in the answer, in the answer but in the wrong spot, and in the answer and in the right spot. The player gets 6 tries to guess the word and if he fails, the word is revealed. Words not in the word bank are rejected. Repeat words are allowed.
 
 ### Necessary Features
 What are the core features that your game should have? These should be things that __must__ be implemented in order to make the game playable, not extra features that could be added to make the game more fun to play.
 
-YOUR ANSWERS HERE
+There must be a word bank, an interface with 30 boxes (6 rows of 5), a correct answer, and letters must turn the right color, display message to summarize the game. Only uppercase letters should appear in the boxes, but the user should not have to hold down shift.
 
 ### Extra Features
 What are some features that are not essential to gameplay, but you would like to see (provided you have time after completing the necessary features.
 
-YOUR ANSWERS HERE
+A counter to keep track of your streak, animations for flipping the letters over, a keyboard on the screen to show which letters have been used, maybe clues or hints, and levels of difficulty. The arrow keys can be used to go to a different box which allows the user to edit any letter without having to delete other letters.
 
 #### Interface
 What will your game look like?
 
-YOUR ANSWERS HERE
+Very similar to the actual Wordle with 6 rows of 5 boxes,(potentially) a keyboard to see which letters have been used, and the Wordle logo (imported as an image).
 
 ### Controls
 How will your game be controlled?
 
-Keyboard Controls:
+Keyboard Controls: The keyboard can be used to type like normal. The enter key finalizes a guess. Delete removes a letter. No numbers or special characters are allowed and those keys are unresponsive.
 
 
-Mouse Controls:
+Mouse Controls: (Potentially) the mouse can be used to click on the keyboard displayed on the screen to type and other buttons that we create for special features (hints, reset) will be controlled by mouseClick.
 
 
 
 ### Classes
 What classes will you be creating for this project? Include the instance variables and methods that you believe you will need. You will be required to create at least 2 different classes.
 
-CLASS NAME0
+Box
 - Instance variables:
-  - LIST INSTANCE VARS HERE
+  - size, x, y, char, color
 - METHODS
-  - LIST METHODS HERE
+  - setup : set the box's x, y, size, and initial text (which is the empty string)
+  - display: display the box on the screen
+  - type: changes the text inside of the box to what the user types
+  - changeColor: change the color of the box based on the character it contains
+  - reset: resets the box to its original setup
 
-CLASS NAME1
+Keys
 - Instance variables:
-  - LIST INSTANCE VARS HERE
+  - size, x, y, char, color
 - METHODS
-  - LIST METHODS HERE
+  - setup : set the key's x, y, size, and initial text (which is its respective letter on the qwerty keyboard)
+  - display: display the key on the screen with its assigned letter as text in the middle
+  - changeColor: change the color of the key based on whether the key's letter is in the correct answer
+  - reset: resets the key to its original setup
+  
