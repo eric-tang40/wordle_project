@@ -1,5 +1,5 @@
 # Project 00 For NeXT CS
-### Class Period:
+### Class Period: 5
 ### Name0: Eric Tang
 ### Name1: Kai Chandan
 ---
@@ -40,37 +40,37 @@ Type Racer specific requirements.
 ### Rules
 What are the core rules of your game?
 
-Player guesses a 5-letter word form a word bank, and the letters of that word are sorted into gray, yellow and green which are respectively not in the answer, in the answer but in the wrong spot, and in the answer and in the right spot. The player gets 6 tries to guess the word and if he fails, the word is revealed. Words not in the word bank are rejected. Repeat words are allowed.
+__Player guesses a 5-letter word from a word bank, and the letters of that word are sorted into gray, yellow and green which are respectively not in the answer, in the answer but in the wrong spot, and in the answer and in the right spot. The player gets 6 tries to guess the word and if he fails, the word is revealed. Words not in the word bank are rejected. Repeat words are allowed.__
 
 ### Necessary Features
 What are the core features that your game should have? These should be things that __must__ be implemented in order to make the game playable, not extra features that could be added to make the game more fun to play.
 
-There must be a word bank, an interface with 30 boxes (6 rows of 5), a correct answer, and letters must turn the right color, display message to summarize the game. Only uppercase letters should appear in the boxes, but the user should not have to hold down shift.
+__There must be a general word bank, a specific word bank of answers, an interface with 30 boxes (6 rows of 5), a correct answer, letters must turn the right color, and a message displayed at the end to summarize the game (number of moves, win/lose). Users should be able to guess words from the word bank regardless of whether they are in the answer bank. Words that are not in the word bank return a message of "not a word". Only uppercase letters should appear in the boxes, but the user should not have to hold down shift.__
 
 ### Extra Features
 What are some features that are not essential to gameplay, but you would like to see (provided you have time after completing the necessary features.
 
-A counter to keep track of your streak, animations for flipping the letters over, a keyboard on the screen to show which letters have been used, maybe clues or hints, and levels of difficulty. The arrow keys can be used to go to a different box which allows the user to edit any letter without having to delete other letters.
+__A counter to keep track of your streak, animations for flipping the letters over, a keyboard on the screen to show which letters have been used, maybe clues or hints, and levels of difficulty. The arrow keys can be used to go to a different box which allows the user to edit any letter without having to delete other letters.__
 
 #### Interface
 What will your game look like?
 
-Very similar to the actual Wordle with 6 rows of 5 boxes,(potentially) a keyboard to see which letters have been used, and the Wordle logo (imported as an image).
+__Very similar to the actual Wordle with 6 rows of 5 boxes, a keyboard to see which letters have been used (probably), and the Wordle logo (imported as an image). Boxes for the letters have bold outlines and they should have a thin margin inbetween them.__
 
 ### Controls
 How will your game be controlled?
 
-Keyboard Controls: The keyboard can be used to type like normal. The enter key finalizes a guess. Delete removes a letter. No numbers or special characters are allowed and those keys are unresponsive.
+__Keyboard Controls: The keyboard can be used to type like normal. The enter key finalizes a guess, but will not submit words that are greater than or fewer than 5 letters long. Delete removes a letter. No numbers or special characters are allowed and most of those keys are unresponsive.__
 
 
-Mouse Controls: (Potentially) the mouse can be used to click on the keyboard displayed on the screen to type and other buttons that we create for special features (hints, reset) will be controlled by mouseClick.
+__Mouse Controls: (Probably) the mouse can be used to click on the keyboard displayed on the screen to type and other buttons that we create for special features (hints, reset) will be controlled by mouseClick. __
 
 
 
 ### Classes
 What classes will you be creating for this project? Include the instance variables and methods that you believe you will need. You will be required to create at least 2 different classes.
 
-Box
+__Box__
 - Instance variables:
   - size, x, y, char, color
 - METHODS
@@ -80,7 +80,7 @@ Box
   - changeColor: change the color of the box based on the character it contains
   - reset: resets the box to its original setup
 
-Keys
+__Keys__
 - Instance variables:
   - size, x, y, char, color
 - METHODS
