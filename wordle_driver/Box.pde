@@ -29,7 +29,4 @@ class Box {
   void charChange(String newStr) {
     ch = newStr;
   }
-  
-  void colorChange(color c) {
-  }
 }

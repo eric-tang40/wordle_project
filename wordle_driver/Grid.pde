@@ -23,5 +23,10 @@ class Grid {
       margin_x = 0;
     }
   }
+  
+  void boxColorChange(int row, int column, color c) {
+    fill(c);
+    g[row][column].setup();
+  }
 
 }
