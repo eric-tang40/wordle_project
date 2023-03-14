@@ -25,8 +25,4 @@ class Box {
     text(ch, bx + width/35, by + width/17);
     fill(255);
   }
-  
-  void charChange(String newStr) {
-    ch = newStr;
-  }
 }
