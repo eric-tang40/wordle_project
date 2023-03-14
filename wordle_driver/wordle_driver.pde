@@ -3,23 +3,67 @@ Grid g;
 int margin, size;
 int curRow, curCol;
 color green = #11ED19;
+String answer;
+String[] answer_list;
+String[] guess;
 
 void setup() {
   size(600,600);
   size = width/12;
   margin = 10;
   curRow = curCol = 0;
-  String[] answer;
-  String[] guess;
   
-  answer = loadStrings("wordle_answer_words.txt");
+  answer_list = loadStrings("wordle_answer_words.txt");
   guess = loadStrings("wordle_guess_words.txt");
   //printArray(guess);
   
   g = new Grid(6,5,margin);
+  answer = generateRandomAnswer(answer_list); 
+  //for the future, we can code answer into keyPressed after we create a 
+  //start or a home screen.
+  println(answer);
 }
 
 void draw() {
+}
+
+String generateRandomAnswer(String a[]) {
+  String answer = "";
+  int randomIndex = int(random(0, a.length));
+  answer = a[randomIndex];
+  answer = answer.toUpperCase();
+  return answer;
+}
+
+boolean equalsAnswer(String answer, String attempt) {
+  if(answer.equals(attempt)) {
+    return true;
+  }
+  return false;
+}
+
+boolean checkinList(String a[], String attempt) {
+  for(int i=0; i<a.length; i++) {
+    attempt = attempt.toLowerCase();
+    if(attempt.equals(a[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+String evaluateAttempt(String a[], String answer, String attempt) {
+  if(checkinList(a, attempt)) {
+    if(equalsAnswer(answer, attempt)) {
+      return "that's correct";
+    }
+    else {
+      return "incorrect";
+    }
+  }
+  else {
+    return "that's not a word";
+  }
 }
 
 void keyPressed() {
@@ -29,7 +73,9 @@ void keyPressed() {
   
   if(key >= 'a' && key <= 'z') {
     if(curCol < 5) {
-      g.charChange(curRow, curCol, str(key));
+      String user_input = str(key);
+      user_input = user_input.toUpperCase();
+      g.charChange(curRow, curCol, user_input);
       curCol++;
     }
   }
@@ -40,7 +86,7 @@ void keyPressed() {
       String s = g.getStringOf(curRow, 4-i);
       word += s;
     }
-    println(word);
+    println(evaluateAttempt(guess, answer, word));
     
     curCol = 0;
     if(curRow < 5) {
@@ -52,7 +98,6 @@ void keyPressed() {
   }
   
   if(key == BACKSPACE) {
-    println("ran");
     if(curCol > 0) {
       curCol--;
     }
