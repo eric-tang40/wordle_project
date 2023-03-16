@@ -3,6 +3,8 @@ Grid g;
 int margin, size;
 int curRow, curCol;
 color green = #11ED19;
+color gray = #A2A2A2;
+color yellow = #D6CB54;
 String answer;
 String[] answer_list;
 String[] guess;
@@ -66,6 +68,36 @@ String evaluateAttempt(String a[], String answer, String attempt) {
   }
 }
 
+void checkBoxes(String answer, String attempt) {
+  String[] a;
+  String[] b;
+  a = new String[5];
+  b = new String[5];
+  for(int i=0; i<answer.length(); i++) {
+    a[i] = str(answer.charAt(i));
+    b[i] = str(attempt.charAt(i));
+  }
+  for(int i=0; i<b.length; i++) {
+    String c = b[i];
+    int num_falses = 0;
+    for(int r=0; r<a.length; r++) {
+      if(c.equals(a[r]) == false) {
+        num_falses++;
+      }
+      if(c.equals(a[i])) {
+        g.boxColorChange(curRow, i, color(green));
+        num_falses = 100;
+      }
+    }
+    if(num_falses == 5) {
+      g.boxColorChange(curRow, i, color(gray));
+    }
+    else if (num_falses < 5) {
+      g.boxColorChange(curRow, i, color(yellow));
+    }
+  }
+}
+
 void keyPressed() {
   //if(key == 'd') {
   //  g.boxColorChange(curRow, curCol, color(green));
@@ -87,6 +119,10 @@ void keyPressed() {
       word += s;
     }
     println(evaluateAttempt(guess, answer, word));
+    //if(checkinList(guess, word)) {
+      checkBoxes(answer, word);
+    //}
+    //maybe put checkBoxes inside of evaluate Attempt and only call evaluateAttmept
     
     curCol = 0;
     if(curRow < 5) {
