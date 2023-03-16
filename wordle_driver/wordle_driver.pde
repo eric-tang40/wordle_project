@@ -11,6 +11,7 @@ String[] guess;
 String [] won_messages;
 boolean won = false;
 boolean is_word = true;
+boolean game_over = false;
 
 void setup() {
   background(230);
@@ -25,15 +26,18 @@ void setup() {
   
   g = new Grid(6,5,margin);
   answer = generateRandomAnswer(answer_list); 
-  //for the future, we can code answer into keyPressed after we create a 
-  //start or a home screen.
-  println(answer);
+  //println(answer);
 }
 
 void draw() {
   if(won == false) {
     if(is_word) {
-      displayText("WORDLE", width/2 - 25, margin/2 + size/2);
+      if(game_over == false) {
+        displayText("WORDLE", width/2 - 25, margin/2 + size/2);
+      }
+      else {
+        displayText("You Lost", width/2 - 25, margin/2 + size/2);
+      }
     }
     else {
       displayText("Not in the Word List", width/3 + 25, margin/2 + size/2);
@@ -165,6 +169,11 @@ void keyPressed() {
         if(curRow < 5) {
           curRow++;
         }
+        else {
+          if(won == false) {
+            game_over = true;
+          }
+        }
       }
     }
   }
@@ -173,7 +182,7 @@ void keyPressed() {
     if(curCol > 0) {
       curCol--;
     }
-    if(won == false) {
+    if(won == false && game_over == false) {
       g.charChange(curRow, curCol, "");
     }
     else {
