@@ -8,16 +8,20 @@ color yellow = #D6CB54;
 String answer;
 String[] answer_list;
 String[] guess;
+String [] won_messages;
+boolean won = false;
+boolean is_word = true;
 
 void setup() {
-  size(600,600);
+  background(230);
+  size(600,700);
   size = width/12;
   margin = 10;
   curRow = curCol = 0;
-  
   answer_list = loadStrings("wordle_answer_words.txt");
   guess = loadStrings("wordle_guess_words.txt");
-  //printArray(guess);
+  won_messages = new String[6];
+  setWonMessages(won_messages);
   
   g = new Grid(6,5,margin);
   answer = generateRandomAnswer(answer_list); 
@@ -27,6 +31,34 @@ void setup() {
 }
 
 void draw() {
+  if(won == false) {
+    if(is_word) {
+      displayText("WORDLE", width/2 - 25, margin/2 + size/2);
+    }
+    else {
+      displayText("Not in the Word List", width/3 + 25, margin/2 + size/2);
+    }
+  }
+  else {
+    int random = int(random(0,6));
+    String random_message = won_messages[random];
+    displayText(random_message, width/2 - 25, margin/2 + size/2);
+    noLoop();
+  }
+}
+
+void displayText(String text, int x, int y) {
+  noStroke();
+  fill(230);
+  rect(width/4 + margin, margin/2, width/2 - margin, size);
+  stroke(0);
+  fill(0);
+  strokeWeight(4);
+  textSize(20);
+  text(text, x, y);
+  strokeWeight(1);
+  stroke(0);
+  fill(255);
 }
 
 String generateRandomAnswer(String a[]) {
@@ -64,6 +96,7 @@ String evaluateAttempt(String a[], String answer, String attempt) {
     }
   }
   else {
+    is_word = false;
     return "that's not a word";
   }
 }
@@ -118,18 +151,21 @@ void keyPressed() {
       String s = g.getStringOf(curRow, 4-i);
       word += s;
     }
-    println(evaluateAttempt(guess, answer, word));
-    //if(checkinList(guess, word)) {
-      checkBoxes(answer, word);
-    //}
-    //maybe put checkBoxes inside of evaluate Attempt and only call evaluateAttmept
     
-    curCol = 0;
-    if(curRow < 5) {
-      curRow++;
+    if(evaluateAttempt(guess, answer, word) == "that's not a word") {
+      //error message display
     }
     else {
-      println("game has ended");
+      if(evaluateAttempt(guess, answer, word) == "that's correct") {
+        won = true;
+      }
+      checkBoxes(answer, word);
+      if(evaluateAttempt(guess, answer, word) == "incorrect") {
+        curCol = 0;
+        if(curRow < 5) {
+          curRow++;
+        }
+      }
     }
   }
   
@@ -137,6 +173,24 @@ void keyPressed() {
     if(curCol > 0) {
       curCol--;
     }
-    g.charChange(curRow, curCol, "");
+    if(won == false) {
+      g.charChange(curRow, curCol, "");
+    }
+    else {
+      //restart button appears
+      //game summary,etc
+    }
+    if(is_word == false) {
+      is_word = true;
+    }
   }
+}
+
+void setWonMessages(String[] a) {
+  a[0] = "Winner";
+  a[1] = "Great";
+  a[2] = "You won";
+  a[3] = "Nice Job";
+  a[4] = "Good"; 
+  a[5] = "Lucky";
 }
