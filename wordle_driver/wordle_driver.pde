@@ -1,5 +1,6 @@
 Grid g;
 Grid k1, k2, k3;
+Box end, delete;
 
 int margin, size;
 int curRow, curCol;
@@ -19,7 +20,7 @@ String[] bottom = {"Z", "X", "C", "V", "B", "N", "M"};
 
 void setup() {
   background(230);
-  size(600,700);
+  size(600,800);
   size = width/12;
   margin = 10;
   curRow = curCol = 0;
@@ -29,9 +30,13 @@ void setup() {
   setWonMessages(won_messages);
   
   g = new Grid(6,5,margin);
-  k1 = new Grid(1,10,margin, width/6, height/3 * 2, top);
-  k1 = new Grid(1,9,margin, width/6 + width/30, height/3 * 2 + 7*margin, mid);
-  k1 = new Grid(1,7,margin, width/6 + width/30 + width/15, height/3 * 2 + 14*margin, bottom);
+  k1 = new Grid(1,10,margin, width/6, height/3 + height/4, top);
+  k2 = new Grid(1,9,margin, width/6 + width/30, height/3 * 2 + 7*margin - height/12, mid);
+  k3 = new Grid(1,7,margin, width/6 + width/30 + width/15, height/3 * 2 + 14*margin - height/12, bottom);
+  end = new Box(width/6-width/9, height/3 * 2 + 14*margin - height/12, "RESET", 500, 40);
+  end.setupKey(90,60);
+  delete = new Box(width/3+width/2 - width/16, height/3 * 2 + 14*margin - height/12, "DELETE", 500, 40);
+  delete.setupKey(105,60);
   answer = generateRandomAnswer(answer_list); 
   println(answer);
 }
@@ -43,7 +48,7 @@ void draw() {
         displayText("WORDLE", width/2 - 25, margin/2 + size/2);
       }
       else {
-        displayText("You Lost", width/2 - 25, margin/2 + size/2);
+        displayText("Answer: " + answer, width/2-50, margin/2 + size/2);
       }
     }
     else {
@@ -112,14 +117,17 @@ String evaluateAttempt(String a[], String answer, String attempt) {
   }
 }
 
-String[] checkBoxes(String answer, String attempt) {
-  String[] all;
+String[] checkBoxes(String answer, String attempt, int m) {
+  String[] gra;
+  String[] y;
+  String[] gr;
   String[] a;
-  String[] b;
-  int num_changes = 0;
+  String[] b; 
   a = new String[5];
   b = new String[5];
-  all = new String[5];
+  gra = new String[5];
+  y = new String[5];
+  gr = new String[5];
   for(int i=0; i<answer.length(); i++) {
     a[i] = str(answer.charAt(i));
     b[i] = str(attempt.charAt(i));
@@ -132,34 +140,87 @@ String[] checkBoxes(String answer, String attempt) {
         num_falses++;
       }
       if(c.equals(a[i])) {
+        gr[i] = g.getStringOf(curRow, i);
         g.boxColorChange(curRow, i, color(green));
-        println(i);
-        all[4] = a[i];
-        all[3] = a[i];
-        num_changes++;
         num_falses = 100;
       }
     }
     if(num_falses == 5) {
+      gra[i] = g.getStringOf(curRow, i);
       g.boxColorChange(curRow, i, color(gray));
     }
     else if (num_falses < 5) {
+      y[i] = g.getStringOf(curRow, i);
       g.boxColorChange(curRow, i, color(yellow));
     }
   }
-  println(all);
+  if(m == 1) {
+    return gra;
+  }
+  else if (m==2) {
+    return y;
+  }
+  else if (m==3) {
+    return gr;
+  }
   return a;
 }
 
-//void mouseClicked() {
-//    println("clicked");
-//  }
+// {"A", null, null, null, "K"}
+void changeKeys(String[] a, Grid b, int m) {
+  if(m==1) {
+    for(int r=0; r < a.length; r++) {
+      String test = a[r];
+      for(int i=0; i<b.getNumCols(); i++) {
+        if(test == null) {
+        }
+        else {
+          if(test.equals(b.getStringOf(0, i))) {
+            b.keyColorChange(0,i, color(gray));
+          }
+        }
+      }
+    }
+  }
+  if(m==2) {
+    for(int r=0; r < a.length; r++) {
+      String test = a[r];
+      for(int i=0; i<b.getNumCols(); i++) {
+        if(test == null) {
+        }
+        else {
+          if(test.equals(b.getStringOf(0, i))) {
+            b.keyColorChange(0,i, color(yellow));
+          }
+        }
+      }
+    }
+  }
+  if(m==3) {
+    for(int r=0; r < a.length; r++) {
+      String test = a[r];
+      for(int i=0; i<b.getNumCols(); i++) {
+        if(test == null) {
+        }
+        else {
+          if(test.equals(b.getStringOf(0, i))) {
+            b.keyColorChange(0,i, color(green));
+          }
+        }
+      }
+    }
+  }
+}
+
+void mousePressed() {
+  if(mouseX > width/6-width/9 && mouseX < width/6-width/9 + 90
+  && mouseY > height/3 * 2 + 14*margin - height/12 && mouseY < 
+  height/3 * 2 + 14*margin - height/12 + 60) {
+    setup();
+  }
+}
 
 void keyPressed() {
-  //if(key == 'd') {
-  //  g.boxColorChange(curRow, curCol, color(green));
-  //}
-  
   if(key >= 'a' && key <= 'z') {
     if(curCol < 5) {
       String user_input = str(key);
@@ -183,7 +244,17 @@ void keyPressed() {
       if(evaluateAttempt(guess, answer, word) == "that's correct") {
         won = true;
       }
-      checkBoxes(answer, word);
+      changeKeys(checkBoxes(answer, word, 1), k1, 1);
+      changeKeys(checkBoxes(answer, word, 1), k2, 1);
+      changeKeys(checkBoxes(answer, word, 1), k3, 1);
+      
+      changeKeys(checkBoxes(answer, word, 2), k1, 2);
+      changeKeys(checkBoxes(answer, word, 2), k2, 2);
+      changeKeys(checkBoxes(answer, word, 2), k3, 2);
+      
+      changeKeys(checkBoxes(answer, word, 3), k1, 3);
+      changeKeys(checkBoxes(answer, word, 3), k2, 3);
+      changeKeys(checkBoxes(answer, word, 3), k3, 3);
       
       if(evaluateAttempt(guess, answer, word) == "incorrect") {
         curCol = 0;

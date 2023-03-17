@@ -51,9 +51,18 @@ class Grid {
     return g[row][column].ch;
   }
   
+  int getNumCols() {
+    return this.numCols;
+  }
+  
   void boxColorChange(int row, int column, color c) {
     fill(c);
     g[row][column].setup();
+  }
+  
+  void keyColorChange(int row, int column, color c) {
+    fill(c);
+    g[row][column].setupKey(width/15, width/10);
   }
 
   void charChange(int row, int column, String newStr) {

@@ -29,6 +29,7 @@ class Box {
   }
   
   void setup() {
+    noStroke();
     square(bx, by, size);
     fill(c);
     textSize(25);
@@ -43,5 +44,4 @@ class Box {
     text(ch, bx + width/47, by + width/15);
     fill(255);
   }
-  
 }
