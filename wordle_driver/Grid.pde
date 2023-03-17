@@ -14,6 +14,15 @@ class Grid {
     setupArena();  
   }
   
+  Grid(int rows, int columns, int space, int start_x, int start_y, String[] a) {
+    this.numRows = rows ;
+    this.numCols = columns;
+    g = new Box[numRows][numCols];
+    margin = space;
+    top_margin = 50;
+    setupKeyboard(start_x, start_y, a); 
+  }
+  
   void setupArena() {
     for(int i=0; i < numRows; i++) {
       margin_y += 10;
@@ -21,6 +30,18 @@ class Grid {
         margin_x += 10;
         g[i][r] = new Box(width/4 + r * size + margin_x, i * size + margin_y + top_margin, ""); 
         g[i][r].setup();
+      }
+      margin_x = 0;
+    }
+  }
+  
+  void setupKeyboard(int x, int y, String[] a) {
+    for(int i=0; i < numRows; i++) {
+      margin_y += 10;
+      for(int r=0; r < numCols; r++) {
+        margin_x += 10;
+        g[i][r] = new Box(x + int(r*.75*size) + margin_x - 40,y, a[r]); 
+        g[i][r].setupKey(width/15, width/10);
       }
       margin_x = 0;
     }

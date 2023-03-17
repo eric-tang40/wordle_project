@@ -1,4 +1,5 @@
 Grid g;
+Grid k1, k2, k3;
 
 int margin, size;
 int curRow, curCol;
@@ -12,6 +13,9 @@ String [] won_messages;
 boolean won = false;
 boolean is_word = true;
 boolean game_over = false;
+String[] top = {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"};
+String[] mid ={"A", "S", "D", "F", "G", "H", "J", "K", "L"};
+String[] bottom = {"Z", "X", "C", "V", "B", "N", "M"};
 
 void setup() {
   background(230);
@@ -25,8 +29,11 @@ void setup() {
   setWonMessages(won_messages);
   
   g = new Grid(6,5,margin);
+  k1 = new Grid(1,10,margin, width/6, height/3 * 2, top);
+  k1 = new Grid(1,9,margin, width/6 + width/30, height/3 * 2 + 7*margin, mid);
+  k1 = new Grid(1,7,margin, width/6 + width/30 + width/15, height/3 * 2 + 14*margin, bottom);
   answer = generateRandomAnswer(answer_list); 
-  //println(answer);
+  println(answer);
 }
 
 void draw() {
@@ -105,11 +112,14 @@ String evaluateAttempt(String a[], String answer, String attempt) {
   }
 }
 
-void checkBoxes(String answer, String attempt) {
+String[] checkBoxes(String answer, String attempt) {
+  String[] all;
   String[] a;
   String[] b;
+  int num_changes = 0;
   a = new String[5];
   b = new String[5];
+  all = new String[5];
   for(int i=0; i<answer.length(); i++) {
     a[i] = str(answer.charAt(i));
     b[i] = str(attempt.charAt(i));
@@ -123,6 +133,10 @@ void checkBoxes(String answer, String attempt) {
       }
       if(c.equals(a[i])) {
         g.boxColorChange(curRow, i, color(green));
+        println(i);
+        all[4] = a[i];
+        all[3] = a[i];
+        num_changes++;
         num_falses = 100;
       }
     }
@@ -133,7 +147,13 @@ void checkBoxes(String answer, String attempt) {
       g.boxColorChange(curRow, i, color(yellow));
     }
   }
+  println(all);
+  return a;
 }
+
+//void mouseClicked() {
+//    println("clicked");
+//  }
 
 void keyPressed() {
   //if(key == 'd') {
@@ -164,6 +184,7 @@ void keyPressed() {
         won = true;
       }
       checkBoxes(answer, word);
+      
       if(evaluateAttempt(guess, answer, word) == "incorrect") {
         curCol = 0;
         if(curRow < 5) {
