@@ -3,9 +3,10 @@
   - It includes a functional reset button that works to restart the game at any time.
   - Changes color (white, grey, yellow, and green) based on the respective color change on the wordle display/if the reset button is pressed.
   - The delete key is not functional, only there for design purposes.
-- Game messages (for winning, losing, or not being a word) are displayed on the screen. The messages appear in the position of the Wordle logo and go away with user input.
-- Initially we intended to use "char" for our letters, but we found it much easier to use "String" instead.
+- Game messages (for winning, losing, or not being a word) are displayed on the screen. The messages appear in the position of the Wordle logo and go away with user input. 
+  - The Wordle logo is displayed through text rather than an imported image, which allows us to do this.
   - The correct word displays in the Wordle logo if all 6 attempts to solve the word are incorrect.
+- Initially we intended to use "char" for our letters, but we found it much easier to use "String" instead.
 - The "Keys" class became "Grid", within this class, however, the keyboard is set up.  
   - Added different instance variables to correlate with the class: numRows, numCols, margin_x, margin_y, top_margin.
 
