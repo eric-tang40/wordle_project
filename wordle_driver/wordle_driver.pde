@@ -37,7 +37,7 @@ void setup() {
   end.setupKey(90,60);
   delete = new Box(width/3+width/2 - width/16, height/3 * 2 + 14*margin - height/12, "DELETE", 500, 40);
   delete.setupKey(105,60);
-  answer = generateRandomAnswer(answer_list); 
+  answer = generateRandomAnswer(answer_list);
   println(answer);
 }
 
@@ -56,10 +56,7 @@ void draw() {
     }
   }
   else {
-    int random = int(random(0,6));
-    String random_message = won_messages[random];
-    displayText(random_message, width/2 - 25, margin/2 + size/2);
-    noLoop();
+    displayText("You Won!", width/2 - 25, margin/2 + size/2);
   }
 }
 
@@ -166,7 +163,6 @@ String[] checkBoxes(String answer, String attempt, int m) {
   return a;
 }
 
-// {"A", null, null, null, "K"}
 void changeKeys(String[] a, Grid b, int m) {
   if(m==1) {
     for(int r=0; r < a.length; r++) {
@@ -217,6 +213,9 @@ void mousePressed() {
   && mouseY > height/3 * 2 + 14*margin - height/12 && mouseY < 
   height/3 * 2 + 14*margin - height/12 + 60) {
     setup();
+    won = false;
+    game_over = false;
+    is_word = true;
   }
 }
 
