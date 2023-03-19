@@ -3,4 +3,5 @@
   - Changes color (white, grey, yellow, and green) based on the respective color change on the wordle display/if the reset button is pressed.
   - The delete key is not functional, only there for design purposes.
 - Game messages (for winning, losing, or not being a word) are displayed on the screen. The messages appear in the position of the Wordle logo and go away with user input.
+  - The correct word displays in the Wordle logo if all 6 attempts to solve the word are incorrect.
 
