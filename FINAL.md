@@ -22,6 +22,7 @@ List all the game features you were able to implement.
 - We were able to successsfully implement the display, complete with a 6 by 5 grid of boxes, a QWERTY keyboard, and the Wordle logo above the grid of boxes.
 - We were able to implement the changing of box colors to grey, yellow, and green.
 - We were able to implement a functional restart button that can be used to generate a new word from the start, restart at any point when the player decides to give up, or when the player wins/loses.
+- We were able to implement a delete function that allows the player letter by letter to change their word, which is especially useful if the player has typed an invalid word.
 
 
 ---
@@ -30,4 +31,4 @@ List all the game features you were able to implement.
 What changed about your game after the design phase? Separate changes that occurred after the feedback round and changes that occurred during programming.
 - We were able to implement a message display by replacing the Wordle logo with messages based on user input
   - For example, the player typing an invalid word would return "Not in the Word List". The player winning the game would return a "You Won!" message, and losing the game would return a message containing the answer.
-- 
+- We added a number of booleans (is_word, won, game_over) that we used to display the messages (and determine when they should go away).
