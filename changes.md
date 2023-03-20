@@ -3,10 +3,14 @@
   - It includes a functional reset button that works to restart the game at any time.
   - Changes color (white, grey, yellow, and green) based on the respective color change on the wordle display/if the reset button is pressed.
   - The delete key is not functional, only there for design purposes.
+  - Clicking on the keys does not do anything.
 - Game messages (for winning, losing, or not being a word) are displayed on the screen. The messages appear in the position of the Wordle logo and go away with user input. 
   - The Wordle logo is displayed through text rather than an imported image, which allows us to do this.
   - The correct word displays in the Wordle logo if all 6 attempts to solve the word are incorrect.
 - Initially we intended to use "char" for our letters, but we found it much easier to use "String" instead.
 - The "Keys" class became "Grid", within this class, however, the keyboard is set up.  
   - Added different instance variables to correlate with the class: numRows, numCols, margin_x, margin_y, top_margin.
+- We did not write in a class for string manipulation, but instead decided to use helper commands inside of the driver.
+- We scrapped the keys class, which was supposed to be for the keyboard on the bottom. Instead, we just used box and grid but created a new constructor to handle the keyboard.
+- We added a grid class that was a 2d array. This helped us create the 6 by 5 Wordle setup.
 
