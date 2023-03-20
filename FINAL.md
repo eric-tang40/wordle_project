@@ -10,12 +10,19 @@
 - The game is played by typing a five letter word into the display. Each letter goes into one box in the row the player is on.
 - The player then presses **ENTER**; if the word is in the accepted word list, the player can go onto their second attempt. If not, the player has to backspace and choose another word.
 - The boxes of the previous row will now change color according to what the player has inputted. If the letter does not appear in the final word, then the box will turn grey. If the letter appears in the final word but is in the wrong location, the box will turn yellow. If the letter appears in the final word and it is in the right location, the box will turn green.
+  - This will also correlate with the colors of each individual key, which will change accordingly to white, grey, yellow, and green. 
+- The player has a total of 6 turns to correctly guess the 5-letter word. 
+  - If the player is unsuccessful in guessing the word over time, he loses the game and the word is revealed.
 
 
 ---
 
 ### Features
 List all the game features you were able to implement.
+- We were able to successsfully implement the display, complete with a 6 by 5 grid of boxes, a QWERTY keyboard, and the Wordle logo above the grid of boxes.
+- We were able to implement the changing of box colors to grey, yellow, and green.
+- We were able to implement a functional restart button that can be used to generate a new word from the start, restart at any point when the player decides to give up, or when the player wins/loses.
+- 
 
 
 ---
