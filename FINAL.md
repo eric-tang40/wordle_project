@@ -36,3 +36,4 @@ What changed about your game after the design phase? Separate changes that occur
 
 **DURING PROGRAMMING:**
   - We added a number of booleans (is_word, won, game_over) that we used to display the messages (and determine when they should go away).
+  - We decided to make the keyboard three Grids (which are associated with each row), and have the letters be strings taken from a String array. This was easier and more efficient than creating an entirely new Keyboard class.
