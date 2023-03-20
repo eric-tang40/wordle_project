@@ -13,6 +13,7 @@
   - This will also correlate with the colors of each individual key, which will change accordingly to white, grey, yellow, and green. 
 - The player has a total of 6 turns to correctly guess the 5-letter word. 
   - If the player is unsuccessful in guessing the word over time, he loses the game and the word is revealed.
+  - The player may reset the game at any point, and the program will clear the board and have a new answer.
 
 
 ---
@@ -23,6 +24,7 @@ List all the game features you were able to implement.
 - We were able to implement the changing of box colors to grey, yellow, and green.
 - We were able to implement a functional restart button that can be used to generate a new word from the start, restart at any point when the player decides to give up, or when the player wins/loses.
 - We were able to implement a delete function that allows the player letter by letter to change their word, which is especially useful if the player has typed an invalid word.
+- Our program displays a message above the grid depending on the situation the player is in (won, lost, etc.) 
 
 
 ---
@@ -37,3 +39,4 @@ What changed about your game after the design phase? Separate changes that occur
 **DURING PROGRAMMING:**
   - We added a number of booleans (is_word, won, game_over) that we used to display the messages (and determine when they should go away).
   - We decided to make the keyboard three Grids (which are associated with each row), and have the letters be strings taken from a String array. This was easier and more efficient than creating an entirely new Keyboard class.
+  - We no longer tried to make the keyboard accessible through mouseClicked. 
