@@ -29,6 +29,10 @@ List all the game features you were able to implement.
 
 ### Changes
 What changed about your game after the design phase? Separate changes that occurred after the feedback round and changes that occurred during programming.
-- We were able to implement a message display by replacing the Wordle logo with messages based on user input
-  - For example, the player typing an invalid word would return "Not in the Word List". The player winning the game would return a "You Won!" message, and losing the game would return a message containing the answer.
-- We added a number of booleans (is_word, won, game_over) that we used to display the messages (and determine when they should go away).
+
+**FEEDBACK ROUND:**
+  - We were able to implement a message display by replacing the Wordle logo with messages based on user input
+    - For example, the player typing an invalid word would return "Not in the Word List". The player winning the game would return a "You Won!" message, and losing the game would return a message containing the answer.
+
+**DURING PROGRAMMING:**
+  - We added a number of booleans (is_word, won, game_over) that we used to display the messages (and determine when they should go away).
